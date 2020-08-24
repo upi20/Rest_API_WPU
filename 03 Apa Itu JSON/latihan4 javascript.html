@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Latihan JSON</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<script src="../jquery.js"></script>
+	<script>
+		const baseUrl = 'latihan2 encode from database.php';
+		// array literal
+		// let mahasiswa = {
+			// nama: "Isep Lutpi Nur",
+			// npm: "2113191079",
+			// jurusan: "Teknik Informatika"
+		// }
+
+		// console.log(JSON.stringify(mahasiswa));
+
+		// let xhr = new XMLHttpRequest();
+
+
+
+		// xhr
+		// xhr.onreadystatechange = ()=>{
+		// 	if(xhr.readyState == 4 && xhr.status == 200){
+		// 		let mahasiswa = JSON.parse(xhr.responseText);
+		// 		console.log(mahasiswa);
+		// 	}
+		// }
+
+		// xhr.open('GET', 'coba.json', true);
+		// xhr.send();
+
+
+		// pake jquery
+		// $.getJSON('latihan2 encode from database.php', data =>{
+		// 	console.log(data);
+		// });
+
+		// Fetch
+			// async / await
+				// const getDataMahasiswa = async () => {
+				// 	try{
+				// 		const response = await fetch(baseUrl);
+				// 		const responseJson = await response.json();
+				// 		if (responseJson.error) {
+				// 			console.log(responseJson.error)
+				// 		} else {
+				// 			console.log(responseJson)
+				// 		}
+				// 	}catch(error){
+				// 		console.log(error);
+				// 	}
+				// }
+
+			// Promise
+				// const getDataMahasiswa = () =>{
+				// 	fetch(baseUrl)
+				// 	.then(response =>{
+				// 		return response.json();
+				// 	})
+				// 	.then(responseJson => {
+				// 		if (responseJson.error) {
+				// 			console.log(responseJson.error)
+				// 		} else {
+				// 			console.log(responseJson)
+				// 		}
+				// 	})
+				// 	.catch(error => {
+				// 		console.log(error);
+				// 	})
+				// };
+
+				const getDataMahasiswa=()=>{fetch(baseUrl).then(response=>{return response.json();}).then(responseJson=>{if(responseJson.error){console.log(responseJson.error)}else{console.log(responseJson)}}).catch(error=>{console.log(error);})};
+		getDataMahasiswa();
+	</script>
+</body>
+</html>
