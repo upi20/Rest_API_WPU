@@ -23,14 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$protocol = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ?  "https" : "http");
-$base_url = $protocol . "://".$_SERVER['HTTP_HOST'];
-$base_url_app = $base_url . str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-$config['base_url']	= $base_url_app;
-$config['assets_path'] = 'assets/';
-$config['index_page'] 		= '';
-$config['uri_protocol']		= 'AUTO';
-$config['url_suffix'] = '';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +35,7 @@ $config['url_suffix'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
