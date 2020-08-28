@@ -1,0 +1,25 @@
+section{
+	min-height: 420px;
+}
+
+.card-hover {
+    transition: all 0.3s ease-in-out
+}
+
+.card-hover:hover, .ig-thumbnail:hover {
+    transform: scale(1.03, 1.03);
+    cursor: pointer;
+}
+
+.ig-thumbnail{
+	width: 100px;
+	height: 100px;
+	float: left;
+	overflow: hidden;
+	margin: 4px;
+	transition: all 0.3s ease-in-out
+}
+
+.ig-thumbnail img{
+	width: 100px;
+}

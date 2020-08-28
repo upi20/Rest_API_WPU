@@ -25,15 +25,6 @@ function getDataByCategory($category){
 	return $meals;
 }
 
-function notFound(){
-	$data = [
-		"error" => true,
-		"messsage" => "404 Not Found",
-		"status" => 404
-	];
-	return json_encode($data);
-}
-
 function getAllData(){
 	$categiories = getCategories();
 	$data['meals'] = [];
@@ -46,6 +37,16 @@ function getAllData(){
 	}
 	return json_encode($data);
 }
+
+function notFound(){
+	$data = [
+		"error" => true,
+		"messsage" => "404 Not Found",
+		"status" => 404
+	];
+	return json_encode($data);
+}
+
 
 if (isset($_GET["data"])) {
 	switch ($_GET["data"]) {
@@ -74,7 +75,29 @@ if (isset($_GET["data"])) {
 			break;
 	}
 } else {
-	// echo notFound();
-
-	getAllData();
+	$html = '
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Data Source</title>
+			<link rel="stylesheet" href="">
+		</head>
+		<body>
+			<h1>Data Source Meal</h1>
+				<h2>Get Data Random By Category</h2>
+					<p>http://localhost/aplikasi/Rest_API_WPU/04%20Bekerja%20dengan%20JSON/data-source.php?data=meals</p>
+				<h2>Get Random Categories</h2>
+					<p>http://localhost/aplikasi/Rest_API_WPU/04%20Bekerja%20dengan%20JSON/data-source.php?data=randomcategories</p>
+				<h2>Get Data By Categories</h2>
+					<p>http://localhost/aplikasi/Rest_API_WPU/04%20Bekerja%20dengan%20JSON/data-source.php?data=category&c={category name}</p>
+				<h2>Get All Data</h2>
+					<p>http://localhost/aplikasi/Rest_API_WPU/04%20Bekerja%20dengan%20JSON/data-source.php?data=all</p>
+		</body>
+		</html>
+	';
+	echo $html;
 }
+?>
