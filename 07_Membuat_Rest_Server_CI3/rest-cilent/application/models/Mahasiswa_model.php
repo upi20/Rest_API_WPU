@@ -1,9 +1,43 @@
 <?php 
-
+use GuzzleHttp\Client;
 class Mahasiswa_model extends CI_model {
+   
+    private $_client;
+    private $_key = 'mahasiswa123'; 
+
+    public function __construct(){
+        parent::__construct();
+        $this->_client = new Client([
+            'base_uri' => 'http://localhost/aplikasi/Rest_API_WPU/07_Membuat_Rest_Server_CI3/rest-server/api/',
+            'auth' => ['admin', '1234']
+        ]);
+    }
+
     public function getAllMahasiswa()
     {
-        return $this->db->get('mahasiswa')->result_array();
+        $response = $this->_client->request('GET', 'mahasiswa' ,[
+            'query' => [
+                'key' => 'mahasiswa123'
+            ]
+        ]);
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        return $result['data'];
+    }
+
+    public function getMahasiswaById($id)
+    {
+        $response = $this->_client->request('GET', 'mahasiswa' ,[
+            'query' => [
+                'key' => $this->_key,
+                'id' => $id
+            ]
+        ]);
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        return $result['data'][0];
     }
 
     public function tambahDataMahasiswa()
@@ -12,34 +46,43 @@ class Mahasiswa_model extends CI_model {
             "nama" => $this->input->post('nama', true),
             "npm" => $this->input->post('npm', true),
             "email" => $this->input->post('email', true),
-            "jurusan" => $this->input->post('jurusan', true)
+            "jurusan" => $this->input->post('jurusan', true),
+            'key' => $this->_key
         ];
 
-        $this->db->insert('mahasiswa', $data);
-    }
-
-    public function hapusDataMahasiswa($id)
-    {
-        // $this->db->where('id', $id);
-        $this->db->delete('mahasiswa', ['id' => $id]);
-    }
-
-    public function getMahasiswaById($id)
-    {
-        return $this->db->get_where('mahasiswa', ['id' => $id])->row_array();
+        $response = $this->_client->request('POST', 'mahasiswa' ,['form_params' => $data]);
+        $result = json_decode($response->getBody()->getContents(), true);
+        return $result;
     }
 
     public function ubahDataMahasiswa()
     {
         $data = [
+            "id" => $this->input->post('id', true),
             "nama" => $this->input->post('nama', true),
             "npm" => $this->input->post('npm', true),
             "email" => $this->input->post('email', true),
-            "jurusan" => $this->input->post('jurusan', true)
+            "jurusan" => $this->input->post('jurusan', true),
+            'key' => $this->_key
         ];
 
-        $this->db->where('id', $this->input->post('id'));
-        $this->db->update('mahasiswa', $data);
+        $response = $this->_client->request('PUT', 'mahasiswa' ,['form_params' => $data]);
+        $result = json_decode($response->getBody()->getContents(), true);
+        return $result;
+    }
+
+    public function hapusDataMahasiswa($id)
+    {
+        $response = $this->_client->request('DELETE', 'mahasiswa' ,[
+            'form_params' => [
+                'key' => $this->_key,
+                'id' => $id
+            ]
+        ]);
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        return $result;
     }
 
     public function cariDataMahasiswa()
