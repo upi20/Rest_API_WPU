@@ -1,0 +1,14 @@
+{
+    "name": "iseplutpinur/rest-client",
+    "description": "Latihan restful API web programing unpas",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Isep Lutpi Nur",
+            "email": "iseplutpinur7@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    }
+}
